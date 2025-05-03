@@ -19,9 +19,13 @@ body {
   padding: 0;
   background: none;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   overflow-x: hidden;
   overflow-y: auto;
-  position: relative;
   touch-action: pan-y;
 }
 
@@ -37,52 +41,59 @@ body::before {
   z-index: -1;
 }
 
-    h1, h2, p {
-      color: #fff;
-      text-shadow: 1px 1px 2px rgb(0, 0, 0);
-    }
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
-    img {
-      width: 150px;
-      height: 150px;
-      object-fit: contain;
-      border-radius: 20px;
-      border: 4px solid #3aafa9;
-      background: white;
-    }
+h1, h2, p {
+  color: #fff;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0);
+}
 
-    .choices {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 20px;
+  border: 4px solid #3aafa9;
+  background: white;
+}
 
-    button {
-      padding: 12px 30px;
-      margin: 10px;
-      border-radius: 10px;
-      border: none;
-      background-color: #3aafa9;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-      transition: transform 0.2s, background-color 0.2s;
-    }
+.choices {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
 
-    button:hover {
-      background-color: #2b7a78;
-      transform: scale(1.05);
-    }
+button {
+  padding: 12px 30px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #3aafa9;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background-color 0.2s;
+}
 
-    .page {
+button:hover {
+  background-color: #2b7a78;
+  transform: scale(1.05);
+}
+
+.page {
   position: absolute;
   top: 0;
   left: 100%;
-  width: 100vw;  /* <- ini penting */
-  max-width: 100vw; /* mencegah meluber */
+  width: 100vw;
   height: 100%;
   padding-top: 50px;
   opacity: 0;
@@ -110,51 +121,51 @@ body::before {
   opacity: 1;
 }
 
-    #feedback, #resultText {
-      margin-top: 20px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+#feedback, #resultText {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    #resultText.green {
-      color: rgb(21, 255, 0);
-    }
+#resultText.green {
+  color: rgb(21, 255, 0);
+}
 
-    #resultText.red {
-      color: pink;
-    }
+#resultText.red {
+  color: pink;
+}
 
-    #score, #questionCounter {
-      margin-top: 30px;
-      font-size: 24px;
-      color: #25a4d3;
-    }
+#score, #questionCounter {
+  margin-top: 30px;
+  font-size: 24px;
+  color: #25a4d3;
+}
 
-    .back-button {
-      margin-top: 30px;
-    }
+.back-button {
+  margin-top: 30px;
+}
 
-    @media (max-width: 600px) {
-      img {
-        width: 120px;
-        height: 120px;
-      }
+@media (max-width: 600px) {
+  img {
+    width: 120px;
+    height: 120px;
+  }
 
-      button {
-        padding: 10px 20px;
-        font-size: 16px;
-      }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
 
-      h1, h2, p {
-        font-size: 18px;
-      }
+  h1, h2, p {
+    font-size: 18px;
+  }
 
-      #score {
-        font-size: 20px;
-      }
-    }
+  #score {
+    font-size: 20px;
+  }
+}
 
-    html, body {
+html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -162,60 +173,69 @@ body::before {
   </style>
 </head>
 <body onclick="startBacksound()">
-
   <audio id="backsound" src="backsound.mp3" loop></audio>
   <audio id="soundCorrect" src="benar.mp3"></audio>
   <audio id="soundWrong" src="salah.mp3"></audio>
   <audio id="animal-audio" src=""></audio>
 
   <div id="welcome" class="page active">
-    <h1>👋 Selamat Datang di Dunia Hewan Anak!</h1>
-    <p>Temukan keasyikan bermain sambil belajar tentang hewan!</p>
-    <button onclick="goToGame('home')">Mulai</button>
+    <div class="center-content">
+      <h1>👋 Selamat Datang di Dunia Hewan Anak!</h1>
+      <p>Temukan keasyikan bermain sambil belajar tentang hewan!</p>
+      <button onclick="goToGame('home')">Mulai</button>
+    </div>
   </div>
 
   <div id="home" class="page">
-    <h1>🌟 Dunia Hewan Anak 🌟</h1>
-    <p>Pilih permainan yang ingin kamu mainkan:</p>
-    <div class="choices">
-      <button onclick="goToGame('gameImage')">🎨 Tebak Gambar Hewan</button>
-      <button onclick="goToGame('gameSound')">🔊 Tebak Suara Hewan</button>
+    <div class="center-content">
+      <h1>🌟 Dunia Hewan Anak 🌟</h1>
+      <p>Pilih permainan yang ingin kamu mainkan:</p>
+      <div class="choices">
+        <button onclick="goToGame('gameImage')">🎨 Tebak Gambar Hewan</button>
+        <button onclick="goToGame('gameSound')">🔊 Tebak Suara Hewan</button>
+      </div>
     </div>
   </div>
 
   <div id="gameImage" class="page">
-    <h1>🐾 Tebak Gambar Hewan 🐾</h1>
-    <div id="questionCounter"></div>
-    <img id="image" src="" alt="Gambar hewan" title="Gambar hewan">
-    <div class="choices" id="choices"></div>
-    <div id="feedback"></div>
+    <div class="center-content">
+      <h1>🐾 Tebak Gambar Hewan 🐾</h1>
+      <div id="questionCounter"></div>
+      <img id="image" src="" alt="Gambar hewan" title="Gambar hewan">
+      <div class="choices" id="choices"></div>
+      <div id="feedback"></div>
+    </div>
   </div>
 
   <div id="gameSound" class="page">
-    <h1>🦁 Tebak Suara Hewan</h1>
-    <button onclick="playAnimal()">🔊 Mainkan Suara</button>
-    <div class="choices">
-      <button onclick="checkAnimal('kucing')">Kucing</button>
-      <button onclick="checkAnimal('anjing')">Anjing</button>
-      <button onclick="checkAnimal('sapi')">Sapi</button>
-      <button onclick="checkAnimal('kelinci')">Kelinci</button>
-      <button onclick="checkAnimal('gajah')">Gajah</button>
-      <button onclick="checkAnimal('harimau')">Harimau</button>
-      <button onclick="checkAnimal('kuda')">Kuda</button>
-      <button onclick="checkAnimal('ikan')">Ikan</button>
-      <button onclick="checkAnimal('burung')">Burung</button>
-      <button onclick="checkAnimal('singa')">Singa</button>
-    </div>
-    <p id="resultText"></p>
-    <div class="back-button">
-      <button onclick="goToGame('home')">⬅️ Kembali ke Menu</button>
+    <div class="center-content">
+      <h1>🦁 Tebak Suara Hewan</h1>
+      <button onclick="playAnimal()">🔊 Mainkan Suara</button>
+      <div class="choices">
+        <button onclick="checkAnimal('kucing')">Kucing</button>
+        <button onclick="checkAnimal('anjing')">Anjing</button>
+        <button onclick="checkAnimal('sapi')">Sapi</button>
+        <button onclick="checkAnimal('kelinci')">Kelinci</button>
+        <button onclick="checkAnimal('gajah')">Gajah</button>
+        <button onclick="checkAnimal('harimau')">Harimau</button>
+        <button onclick="checkAnimal('kuda')">Kuda</button>
+        <button onclick="checkAnimal('ikan')">Ikan</button>
+        <button onclick="checkAnimal('burung')">Burung</button>
+        <button onclick="checkAnimal('singa')">Singa</button>
+      </div>
+      <p id="resultText"></p>
+      <div class="back-button">
+        <button onclick="goToGame('home')">⬅️ Kembali ke Menu</button>
+      </div>
     </div>
   </div>
 
   <div id="result" class="page">
-    <h2>🎉 Skor Akhir: <span id="finalScore"></span></h2>
-    <button onclick="goToGame('gameImage')">Main Lagi</button>
-    <button onclick="goToGame('home')">Kembali ke Menu</button>
+    <div class="center-content">
+      <h2>🎉 Skor Akhir: <span id="finalScore"></span></h2>
+      <button onclick="goToGame('gameImage')">Main Lagi</button>
+      <button onclick="goToGame('home')">Kembali ke Menu</button>
+    </div>
   </div>
 
   <script>
